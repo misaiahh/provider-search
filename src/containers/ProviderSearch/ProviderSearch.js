@@ -40,5 +40,11 @@ export default class ProviderSearch extends HTMLElement {
             <member-info></member-info>
             <family-info></family-info>
         `;
+        const modules = this.shadowRoot.querySelectorAll('member-info, family-info');
+        this.shadowRoot.querySelector("search-component").addEventListener("provider-search", (event) => {
+            modules.forEach(module => {
+                module.setAttribute("search", event.detail.value);
+            })
+        });
     }
 }
