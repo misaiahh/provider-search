@@ -1,16 +1,27 @@
 const styles = /*html*/`
     <style>
         :host {
-            height: 100px;
+            margin-top: 20px;
+            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+        }
+
+        result-list {
+            display:flex;
+            justify-content: center;
+            flex-direction: column;
         }
     </style>
 `;
 
 export default class Search extends HTMLElement {
     search = "";
+    memberId = null;
+    memberSelected = false;
+    results = [];
 
     constructor() {
         super();
@@ -30,16 +41,22 @@ export default class Search extends HTMLElement {
         this.render();
     }
 
+    fetchResults(_searchString) {
+        return new Promise((resolve, _reject) => {
+            resolve([{ name: "a" }, { name: "b" }, { name: "c" }]);
+        });
+    }
+
     render() {
         this.shadowRoot.innerHTML = `
             ${styles}            
             <input type="text" placeholder="Search" value="${this.search}">
+            ${this.results.length > 0 ? `<result-list results='${JSON.stringify(this.results)}'></result-list>` : ''}
         `;
-        this.shadowRoot.querySelector("input").addEventListener("keydown", (event) => {
+        this.shadowRoot.querySelector("input").addEventListener("keydown", async (event) => {
             if (event.key === "Enter") {
-                console.log({ value: event.target.value });
-                this.setState({ search: event.target.value });
-                this.dispatchEvent(new CustomEvent('provider-search', { detail: { value: event.target.value } }));
+                const response = await this.fetchResults(event.target.value);
+                this.setState({ results: response });
             }
         });
     }
