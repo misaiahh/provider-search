@@ -1,14 +1,5 @@
 const styles = /*html*/`
     <style>
-        :host {
-            margin-top: 20px;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
         result-list {
             display:flex;
             justify-content: center;
@@ -49,9 +40,15 @@ export default class Search extends HTMLElement {
 
     render() {
         this.shadowRoot.innerHTML = `
-            ${styles}            
-            <input type="text" placeholder="Search" value="${this.search}">
-            ${this.results.length > 0 ? `<result-list results='${JSON.stringify(this.results)}'></result-list>` : ''}
+            ${styles}
+            <panel-component>
+                <span slot="header">
+                    <input type="text" placeholder="Search" value="${this.search}">
+                </span>
+                <span slot="body">
+                    ${this.results.length > 0 ? `<result-list results='${JSON.stringify(this.results)}'></result-list>` : 'Search for a member'}
+                </span>
+            </panel-component>
         `;
         this.shadowRoot.querySelector("input").addEventListener("keydown", async (event) => {
             if (event.key === "Enter") {

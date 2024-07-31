@@ -20,6 +20,9 @@ template.innerHTML = /*html*/`
 
         .panel-body {
             padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .panel-footer {
