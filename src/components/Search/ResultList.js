@@ -32,7 +32,7 @@ export default class ResultList extends HTMLElement {
         }
     }
 
-    connectedCallback() {}
+    connectedCallback() { }
 
     setState(state) {
         Object.assign(this, state);
@@ -52,8 +52,12 @@ export default class ResultList extends HTMLElement {
         `;
         this.$$("button").forEach(b => {
             b.addEventListener("click", (event) => {
-                console.log(event.target.value);
-                this.dispatchEvent(new CustomEvent("member-selected", { detail: { value: event.target.value } }));
+                // console.log(event.target.value);
+                this.dispatchEvent(new CustomEvent("member-selected", {
+                    bubbles: true,
+                    composed: true,
+                    detail: { value: event.target.value }
+                }));
             });
         });
     }
