@@ -9,10 +9,12 @@ const styles = /*html*/`
 `;
 
 export default class ResultList extends HTMLElement {
-    items = [];
+    results = [];
+    $$;
 
     constructor() {
         super();
+        this.$$ = this.querySelectorAll.bind(this);
     }
 
     static get observedAttributes() {
@@ -24,15 +26,13 @@ export default class ResultList extends HTMLElement {
 
         switch (name) {
             case 'results':
-                this.setState({ items: JSON.parse(newValue) });
+                this.setState({ results: JSON.parse(newValue) });
                 this.render();
                 break;
         }
     }
 
-    connectedCallback() {
-        this.render();
-    }
+    connectedCallback() {}
 
     setState(state) {
         Object.assign(this, state);
@@ -40,12 +40,21 @@ export default class ResultList extends HTMLElement {
     }
 
     render() {
-        this.results = JSON.parse(this.getAttribute("results"));
         this.innerHTML = `
             ${styles}
             <ul>
-                ${this.results.map(result => `<li>${result.name}</li>`).join("")}
+                ${this.results.map(r => `
+                    <li>
+                        <button name="member" value="${r.id}">${r.name}</button>
+                    </li>
+                `).join("")}
             </ul>
         `;
+        this.$$("button").forEach(b => {
+            b.addEventListener("click", (event) => {
+                console.log(event.target.value);
+                this.dispatchEvent(new CustomEvent("member-selected", { detail: { value: event.target.value } }));
+            });
+        });
     }
 }

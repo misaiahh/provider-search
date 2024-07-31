@@ -43,7 +43,7 @@ export default class Search extends HTMLElement {
 
     fetchResults(_searchString) {
         return new Promise((resolve, _reject) => {
-            resolve([{ name: "a" }, { name: "b" }, { name: "c" }]);
+            resolve([{ name: "Micky Hallabrin", id: 1 }, { name: "Brian Casserly", id: 2 }, { name: "Bruce Wayne", id: 3 }]);
         });
     }
 
