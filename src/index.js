@@ -2,6 +2,8 @@ import Search, { ResultList } from './components/Search';
 import ProviderSearch from './containers/ProviderSearch';
 import MemberInfo from './components/MemberInfo';
 import FamilyInfo from './components/FamilyInfo';
+import './components/ClaimsModule';
+import './components/ui';
 
 customElements.define('search-component', Search);
 customElements.define('result-list', ResultList);
