@@ -1,4 +1,4 @@
-import Panel from "./Panel";
+import Panel from "./Panel/Panel";
 
 customElements.define("panel-component", Panel);
 
