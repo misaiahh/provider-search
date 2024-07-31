@@ -11,8 +11,8 @@ export default class ClaimsModule extends HTMLElement {
         this.innerHTML = `
             <panel-component>
                 <span slot="header">Claims</span>
-                <span slot="body">Claims</span>
-                <span slot="footer">Claims</span>
+                <span slot="body">Please select a member</span>
+                <span slot="footer">Link to claims</span>
             </panel-component>
         `;
     }

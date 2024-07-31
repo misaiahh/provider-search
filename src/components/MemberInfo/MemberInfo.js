@@ -30,9 +30,11 @@ export default class MemberInfo extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <div class="member-info-container">
-                ${this.search ? this.search : 'Member Info'}
-            </div>
+            <panel-component>
+                <span slot="header">Member Info</span>
+                <span slot="body">${this.search ? this.search : 'Please select a member'}</span>
+                <span slot="footer">Link to member</span>
+            </panel-component>
         `;
     }
 }

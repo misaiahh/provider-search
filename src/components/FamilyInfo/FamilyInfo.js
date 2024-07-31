@@ -31,9 +31,11 @@ export default class FamilyInfo extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <div class="family-info-container">
-                ${this.search ? this.search : 'Family Info'}
-            </div>
+            <panel-component>
+                <span slot="header">Family Info</span>
+                <span slot="body">${this.search ? this.search : 'Please select a member'}</span>
+                <span slot="footer">Link to family</span>
+            </panel-component>
         `;
     }
 }
