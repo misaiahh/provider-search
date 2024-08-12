@@ -30,21 +30,19 @@ template.innerHTML = /*html*/`
             padding: 10px;
         }
     </style>
-        <div class="panel-header">
-            <slot name="header">
-                Header
-            </slot>
-        </div>
-        <div class="panel-body">
-            <slot name="body">
-                Body
-            </slot>
-        </div>
-        <div class="panel-footer">
-            <slot name="footer">
-                Footer
-            </slot>
-        </div>
+    <div class="panel-header">
+        <slot name="header">
+            Header
+        </slot>
+    </div>
+    <div class="panel-body">
+        <slot name="body">
+            Body
+        </slot>
+    </div>
+    <div class="panel-footer">
+        <slot id="footer" name="footer"></slot>
+    </div>
 `;
 
 export default class Panel extends HTMLElement {
@@ -59,5 +57,8 @@ export default class Panel extends HTMLElement {
 
     render() {
         this.shadowRoot.appendChild(template.content.cloneNode(true));
+        const parent = this.shadowRoot.querySelector(".panel-footer");
+        const footer = this.shadowRoot.querySelector("#footer");
+        footer.assignedNodes().length > 0 ? parent.style.display = "block" : parent.style.display = "none";
     }
 }
